@@ -1,0 +1,6 @@
+*.DS_Store
+*-ck.js
+*~
+*wp-config.php
+wp-content/uploads/
+
