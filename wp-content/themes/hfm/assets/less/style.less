@@ -1,8 +1,80 @@
 @import "bootstrap/bootstrap.less";
 
+
+//@import "bootstrap/responsive.less";
+
+/**
+ * LESS MIXINS AND VARIABLES
+ */
+ .backgroundCover {
+ 	background-repeat: no-repeat;
+ 	background-position: center top;
+ 	-webkit-background-size: cover;
+ 	-moz-background-size: cover;
+ 	-o-background-size: cover;
+ 	background-size: cover;
+ }
+
+
+ /**
+  * TYPOGRAPHY
+  */
+
 body {
-  padding-top: 0px;
+  padding-top: 40px;
   padding-bottom: 40px;
 }
 
-//@import "bootstrap/responsive.less";
+
+
+/**
+ * HEADER
+ */
+
+ #header {
+	 .featuredWrapper {
+		 background-color: blue;
+		 margin-bottom: 30px;
+		 position: relative;
+		 overflow: hidden;
+		 
+		 .slides {
+			 height: 300px;	
+			 width: 999999px;		 
+		 }
+		 
+		 .slide {
+			 .backgroundCover; 
+			 color: yellow;
+		 }
+		 
+		 .slideNav {
+			 list-style-type: none;
+			 position: absolute;
+			 bottom: 0;
+			 left: 50%;
+			 margin: 0 auto;
+			 
+			 li {
+				 display: inline-block;
+				 position: relative;
+				 left: -50%;
+				 float: left;
+			 }
+			 a {
+				 display: block;
+				 width: 16px;
+				 height: 16px;
+				 margin-bottom: 4px;
+				 background: transparent url('../images/navicons.png') no-repeat left top;
+			 }
+			 
+			 .current {
+				 a {
+					 background: transparent url('../images/navicons.png') no-repeat right top;
+				 	
+				 }
+			 }
+		 }
+	 }
+ }
