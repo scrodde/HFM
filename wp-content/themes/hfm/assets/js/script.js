@@ -1,13 +1,9 @@
-function initFeaturedSlideShow() {
-	if( $('#featuredWrapper').length === 0)
-		return;
-	
-	$('#featuredWrapper > .slides').serialScroll();
-}
-	
 $(document).ready(function() {
-		
-	initFeaturedSlideShow();
+	
+	$('.carousel').carousel({
+		interval: 5000,
+		pause: 'hover'
+	});
 	
 });
 

@@ -33,7 +33,8 @@
 	</title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'template_url' ); ?>/assets/css/style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'template_url' ); ?>/assets/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/less" media="all" href="<?php bloginfo( 'template_url' ); ?>/assets/less/style.less" />
 	
 	<script src="<?php bloginfo( 'template_url' ); ?>/assets/js/libs/modernizr-2.5.3.min.js"></script>
 <?php
@@ -53,34 +54,42 @@
 		<?php /* Display featured posts if available and on frontpage.. */ ?>
 		<?php if( (is_home() || is_front_page()) && hfm_has_featured_posts() ) : ?>
 
-			<div id="featuredWrapper" class="featuredWrapper">
-				<div class="slides">
+			<div id="featuredWrapper" class="carousel slide">
+				<div class="carousel-inner">
 				<?php
 					$q = hfm_query_featured_posts();
 					while($q->have_posts()) : 
 						$q->the_post();
+						if( !($imgSrc = hfm_featured_image_src('large')) )
+							continue;
 				?>
-						<div class="slide <?php echo ($q->current_post == 0) ? ' current ' : ''; ?>" id="slide-<?php the_ID(); ?>">
-							<?php the_content(); ?>
+						<div class="item <?php echo ($q->current_post == 0) ? ' active ' : ''; ?>" id="slide-<?php the_ID(); ?>">
+							<img src="<?php echo $imgSrc[0] ?>" />
+							<div class="carousel-caption">
+								<h4 class="title"><?php the_title(); ?></h4>
+								<?php the_content(); ?>
+							</div>
 						</div>
 				<?php endwhile; ?>
-				</div>
-				<ul class="slideNav">
-					<?php foreach($q->posts as $p) : ?>
-						<li class="<?php echo ($p->ID == $q->posts[0]->ID) ? ' current ' : ''; ?>"><a href="#" data-target="slide-<?php echo $p->ID; ?>"></a></li>
-					<?php endforeach; ?>
-				</ul>
+				</div> <!-- .carousel-inner -->
+				
+  			  	<a class="carousel-control left" href="#featuredWrapper" data-slide="prev">&lsaquo;</a>
+  			  	<a class="carousel-control right" href="#featuredWrapper" data-slide="next">&rsaquo;</a>
 			</div>
 	
 		<?php endif; ?>
 		
 		<div class="row">
-			<div class="span3 logo">
-				<img src="http://placehold.it/350x150&text=HFM LOGO" />
+			<div class="span2 logo">
+				<img src="http://placehold.it/100x100&text=HFM LOGO" />
 			</div>
-			<div class="span9">
-				<?php wp_nav_menu( array('theme_location' => 'primary', 'container_class' => 'menu-container') ); ?>
-				<?php get_search_form( true ); ?>
+			<div class="span10">
+				<div class="navigation">
+					<?php wp_nav_menu( array('theme_location' => 'primary', 'container' => false) ); ?>
+					<div class="vertical-line">
+						<?php get_search_form( true ); ?>
+					</div>
+				</div>
 			</div>
 		</div>
 		

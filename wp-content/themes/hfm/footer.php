@@ -25,12 +25,28 @@
 	
 </div><!-- .container -->
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="<?php bloginfo('template_url'); ?>/assets/js/libs/jquery-1.7.2.min.js"><\/script>')</script>
 
-<script src="<?php bloginfo('template_url'); ?>/assets/js/libs/bootstrap/bootstrap.min.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/assets/js/libs/jquery.serialScroll-1.2.2-min.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/assets/js/script.js"></script>
+<script>
+Modernizr.load([{
+	load: '//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',
+		complete: function () {
+			if ( !window.jQuery ) {
+			Modernizr.load('<?php bloginfo( 'template_url' ); ?>/assets/js/libs/jquery-1.7.2.min.js');
+			}
+		}
+	},
+	{
+		load: [
+			'<?php bloginfo( 'template_url' ); ?>/assets/js/libs/less-1.3.0.min.js',
+			'<?php bloginfo( 'template_url' ); ?>/assets/js/libs/bootstrap.min.js',
+			'<?php bloginfo( 'template_url' ); ?>/assets/js/libs/jquery.serialScroll-1.2.2-min.js'
+		]
+	},
+	{
+		load: '<?php bloginfo( 'template_url' ); ?>/assets/js/script.js'
+	}
+]);
+</script>
 
 <script>
 	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
