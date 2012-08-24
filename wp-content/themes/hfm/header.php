@@ -51,13 +51,14 @@
 	
 	<div class="row" id="header">
 		<div class="span12">
+			
 		<?php /* Display featured posts if available and on frontpage.. */ ?>
-		<?php if( (is_home() || is_front_page()) && hfm_has_featured_posts() ) : ?>
+		<?php $q = hfm_query_featured_posts(); ?>
+		<?php if( (is_home() || is_front_page()) && $q->have_posts() ) : ?>
 
 			<div id="featuredWrapper" class="carousel slide">
 				<div class="carousel-inner">
 				<?php
-					$q = hfm_query_featured_posts();
 					while($q->have_posts()) : 
 						$q->the_post();
 						if( !($imgSrc = hfm_featured_image_src('large')) )
@@ -73,8 +74,10 @@
 				<?php endwhile; ?>
 				</div> <!-- .carousel-inner -->
 				
+				<?php if($q->post_count > 1) : ?>
   			  	<a class="carousel-control left" href="#featuredWrapper" data-slide="prev">&lsaquo;</a>
   			  	<a class="carousel-control right" href="#featuredWrapper" data-slide="next">&rsaquo;</a>
+				<?php endif; ?>
 			</div>
 	
 		<?php endif; ?>
